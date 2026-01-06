@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+@keyframes softIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-soft {
+  animation: softIn 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* آخر تعريف هو اللي بيشتغل */
+.animate-fade-in {
+  animation: fadeInUp 0.7s ease forwards;
+}
+
+/* ===== Input Styling (Updated) ===== */
+
+.input {
+  @apply w-full px-4 py-2 rounded-xl
+
+  bg-white text-slate-900 placeholder-slate-400
+  border border-slate-300
+
+  dark:bg-slate-800 dark:text-white dark:placeholder-slate-400 dark:border-slate-600
+
+  focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-sky-400
+  transition;
+}
+
+/* Alias لو كنت مستخدم f-input في أماكن تانية */
+.f-input {
+  @apply input;
+}
