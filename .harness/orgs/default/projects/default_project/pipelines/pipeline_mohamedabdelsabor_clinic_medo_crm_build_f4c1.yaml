@@ -1,0 +1,33 @@
+pipeline:
+  id: pipeline_mohamedabdelsabor_clinic_medo_crm_build_f4c1
+  name: pipeline_mohamedabdelsabor_clinic_medo_crm_build_f4c1
+  stages:
+    - name: Test
+      id: test
+      runtime: cloud
+      platform:
+        os: linux
+        arch: amd64
+      clone:
+        enabled: true
+      cache:
+        enabled: true
+      steps:
+        - name: Install Dependencies and Test
+          id: install_and_test
+          run:
+            container:
+              image: composer:2
+            shell: bash
+            script: |-
+              mkdir -p .harness/reports
+              composer install --no-interaction --prefer-dist
+              echo "APP_KEY=" > .env
+              php artisan key:generate --no-interaction
+              ./vendor/bin/phpunit --log-junit .harness/reports/junit.xml
+            report:
+              type: junit
+              paths:
+                - .harness/reports/junit.xml
+  tags:
+    onboarding: "true"
